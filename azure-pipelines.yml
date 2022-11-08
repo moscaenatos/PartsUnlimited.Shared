@@ -37,10 +37,20 @@ steps:
     packagesToPack: '**/*.csproj'
     versioningScheme: 'off'
 
+# - task: NuGetAuthenticate@1
+# - task: NuGetCommand@2
+#   inputs:
+#     command: 'push'
+#     packagesToPush: '$(Build.ArtifactStagingDirectory)/**/*.nupkg;!$(Build.ArtifactStagingDirectory)/**/*.symbols.nupkg'
+#     nuGetFeedType: 'internal'
+#     publishVstsFeed: '033a1275-a609-482a-8e01-d701a198c570'
 - task: NuGetAuthenticate@1
-- task: NuGetCommand@2
   inputs:
-    command: 'push'
-    packagesToPush: '$(Build.ArtifactStagingDirectory)/**/*.nupkg;!$(Build.ArtifactStagingDirectory)/**/*.symbols.nupkg'
-    nuGetFeedType: 'internal'
-    publishVstsFeed: '033a1275-a609-482a-8e01-d701a198c570'
+    nuGetServiceConnections: moscaen
+- task: NuGetToolInstaller@1 # Optional if nuget.exe >= 4.8.5385 is already on the path
+  inputs:
+    versionSpec: '*'
+    checkLatest: true
+- script: nuget restore
+# ...
+- script: nuget push -ApiKey AzDO -Source "PartsUnlimited" PartsUnlimited.Shared.1.0.1.nupkg
