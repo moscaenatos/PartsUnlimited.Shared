@@ -39,6 +39,8 @@ steps:
   displayName: 'NuGet push'
   inputs:
     command: push
-    publishVstsFeed: 'Package Management with Azure Artifacts/PartsUnlimited.Shared'
+    packagesToPush: '$(Build.ArtifactStagingDirectory)/**/*.nupkg;!$(Build.ArtifactStagingDirectory)/**/*.symbols.nupkg'
+    nuGetFeedType: internal
+    publishVstsFeed: 'PartsUnlimited.Shared'
     allowPackageConflicts: true
 
