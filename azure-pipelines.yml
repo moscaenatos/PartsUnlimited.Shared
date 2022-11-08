@@ -39,6 +39,6 @@ steps:
   displayName: 'NuGet push'
   inputs:
     command: push
-    publishVstsFeed: 'PartsUnlimitedShared/PartsUnlimitedShared'
+    publishVstsFeed: 'Package Management with Azure Artifacts/PartsUnlimitedShared'
     allowPackageConflicts: false
 
